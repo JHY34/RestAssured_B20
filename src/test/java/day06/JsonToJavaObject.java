@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import io.restassured.http.ContentType;
 import pojo.Spartan;
+import pojo.SpartanRead;
 import utility.ConfigurationReader;
 import utility.SpartanUtil;
 
@@ -45,6 +46,16 @@ public class JsonToJavaObject {
         Map<String, Object> responseMap = jp.getMap("");
 
         System.out.println("responseMap = " + responseMap);
+
+
+        SpartanRead sp = jp.getObject("" ,SpartanRead.class) ;
+        System.out.println("sp = " + sp);
+        // it will print the provided Spartan Object
+
+
+
+
+
     }
 
     /**
