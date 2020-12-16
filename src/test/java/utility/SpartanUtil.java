@@ -1,6 +1,7 @@
 package utility;
 
 import com.github.javafaker.Faker;
+import pojo.Spartan;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,7 +10,8 @@ public class SpartanUtil {
 
     // The purpose of this main method is to test the below method
     public static void main(String[] args) {
-        System.out.println(  getRandomSpartanRequestPayload()   );
+        System.out.println(  getRandomSpartanRequestPayload());
+        System.out.println("getRandomSpartanPOJO_Payload() = " + getRandomSpartanPOJO_Payload());
     }
 
 
@@ -25,6 +27,21 @@ public class SpartanUtil {
 
         return payloadMap;
     }
+
+    public static Spartan getRandomSpartanPOJO_Payload () {
+
+        Faker faker = new Faker();
+
+        Spartan randomSpartan = new Spartan();
+        randomSpartan.setName(faker.name().firstName());
+        randomSpartan.setGender(faker.demographic().sex());
+        randomSpartan.setPhone(faker.number().numberBetween(5000000000L, 9999999999L));
+        return randomSpartan ;
+
+
+    }
+    
+    
 
 
 

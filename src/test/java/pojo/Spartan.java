@@ -7,7 +7,7 @@ public class Spartan {
 
     private String name;
     private String gender;
-    private String phone;
+    private long phone;
 
 
     // this is the required constructor
@@ -15,7 +15,7 @@ public class Spartan {
 
     }
 
-    public Spartan(String name, String gender, String phone) {
+    public Spartan(String name, String gender, long phone) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -37,11 +37,11 @@ public class Spartan {
         this.gender = gender;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
