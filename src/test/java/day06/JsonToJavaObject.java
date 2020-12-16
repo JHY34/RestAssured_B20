@@ -10,6 +10,7 @@ import pojo.SpartanRead;
 import utility.ConfigurationReader;
 import utility.SpartanUtil;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.* ;
@@ -51,9 +52,7 @@ public class JsonToJavaObject {
         SpartanRead sp = jp.getObject("" ,SpartanRead.class) ;
         System.out.println("sp = " + sp);
         // it will print the provided Spartan Object
-
-
-
+        
 
 
     }
@@ -82,6 +81,34 @@ public class JsonToJavaObject {
      *
      *
      */
+
+
+
+
+
+
+    @DisplayName("Get All Data and Save Response JsonArray As Java Object")
+    @Test
+    public void getOneSpartanAndSaveResponseJsonAsJavaObject () {
+
+        Response response = given()
+                                    .auth().basic("admin" , "admin").
+                            when()
+                                    .get("/spartans");
+
+        JsonPath jp = response.jsonPath();
+
+        List<SpartanRead> allSpartanPOJO = jp.getList("" , SpartanRead.class);
+
+        //System.out.println("allSpartanPOJO = " + allSpartanPOJO);
+        // gives the result at the same line
+
+        allSpartanPOJO.forEach(System.out::println);
+        // gives all information at different lines
+
+
+
+    }
 
 
 
