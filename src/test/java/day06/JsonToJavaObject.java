@@ -107,6 +107,9 @@ public class JsonToJavaObject {
         // gives all information at different lines
 
 
+        // Send request to /api/spartans/search endpoint
+        // save your jsonArray from search result into
+        // List of SpartanRead POJO
 
     }
 
