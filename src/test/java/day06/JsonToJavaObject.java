@@ -36,7 +36,7 @@ public class JsonToJavaObject {
         Response response = given()
                                     .log().all()
                                     .auth().basic("admin" , "admin")
-                                    .pathParam("id" , 101).
+                                    .pathParam("id" , 1).
                             when()
                                     .get("/spartans/{id}").prettyPeek();
 
