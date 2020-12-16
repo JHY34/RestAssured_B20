@@ -25,4 +25,14 @@ public class CRUD_Practice1 {
         reset();
     }
 
+
+    @DisplayName("Get All Spartans")
+    @Test
+    public void getAllSpartans () {
+        given()
+                .log().all()
+                .auth().basic("admin" , "admin");
+    }
+
+
 }
