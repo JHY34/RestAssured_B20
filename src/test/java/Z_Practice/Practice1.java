@@ -21,7 +21,7 @@ public class Practice1 {
 
    @BeforeAll
     public static void setUp() {
-       baseURI = "http://18.215.150.247:8000";
+       baseURI = "http://18.212.117.224:8000";
        basePath = "/api";
    }
 
@@ -213,6 +213,13 @@ public class Practice1 {
 
                ;
 
+   }
+   
+   
+   @Test
+    public void practice () {
+       Response response = when().get("/employees");
+       System.out.println("response = " + response);
    }
 
 
