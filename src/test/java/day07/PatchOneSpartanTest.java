@@ -53,4 +53,27 @@ public class PatchOneSpartanTest {
 
                 ;
     }
+
+    @DisplayName("Patching 1 data with POJO")
+    @Test
+    public void testPath1DataPartialUpdateWithPOJO(){
+        // we just want to update the name and phone number
+        Spartan sp = new Spartan();  //"Sedat" , "" , 9876543210l);
+
+        // it should fail because MAP is a bettr option with minimal effort
+        // POJO class need so me handling to ignore empty field values
+        // when being serialized
+
+        given()
+                .auth().basic("admin","admin")
+                .log().all()
+                .pathParam("id",100)
+                .contentType(ContentType.JSON)
+                .body( sp).
+                when()
+                .patch("/spartans/{id}").
+                then()
+                .log().all()
+                .statusCode(204) ;
+    }
 }
