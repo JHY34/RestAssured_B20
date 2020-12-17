@@ -112,6 +112,21 @@ public class LibraryAppTest {
     }
 
 
+
+    @DisplayName("4. Save /get_book_categories response as POJO")
+    @Test
+    public void testGetBookCategoriesAsPOJO () {
+        JsonPath jp =   given()
+                                .log().all()
+                                .header("x-library-token" , myToken).
+                        when()
+                                .get("/get_book_categories")
+                .jsonPath();
+    }
+
+
+
+
     // create a utility class LibraryUtility
     // create a static method called getToken(environment, username, password)
 
