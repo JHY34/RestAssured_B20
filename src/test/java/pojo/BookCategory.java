@@ -2,31 +2,31 @@ package pojo;
 
 public class BookCategory {
 
-    private String id ;
-    private String name ;
+    private String category_id;
+    private String category_name;
 
     public String getId() {
-        return id;
+        return category_id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.category_id = id;
     }
 
     public String getName() {
-        return name;
+        return category_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.category_name = name;
     }
 
 
     @Override
     public String toString() {
         return "BookCategory{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                "id='" + category_id + '\'' +
+                ", name='" + category_name + '\'' +
                 '}';
     }
 }
