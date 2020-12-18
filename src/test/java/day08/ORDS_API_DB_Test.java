@@ -70,6 +70,48 @@ public class ORDS_API_DB_Test extends HR_ORDS_TestBase {
         assertThat(r3.getRegion_name()  , is(expectedResultMap.get("REGION_NAME"))  );
 
     }
+    @DisplayName("Testing GET /regions/{region_id} Data Match Database Data With Both Maps")
+    @Test
+    public void testRegionDataFromResponseMatchDB_Data2() {
+
+        int myID = 3;
+        JsonPath jp = given()
+                .pathParam("region_id", myID).
+                        when()
+                .get("/regions/{region_id}").
+                        then()
+                .log().body()
+                .statusCode(200)
+                .extract()
+                .jsonPath();
+
+        // save the response json as a Map object
+        // Here we are calling the overloaded version of getMap method with 3 params
+        // 1. jsonPath String
+        // 2. Data type Map key
+        // 3. Data type Map value
+        // so we can make sure we get exactly what we asked for
+        Map<String, String> actualResultMap = jp.getMap("",String.class,String.class);
+        // do not need to remove extra links from json result
+        // because we are checking key value pair , anything we dont check will not matter
+        System.out.println("actualResultMap = " + actualResultMap);
+
+        DB_Utility.runQuery("SELECT * FROM REGIONS WHERE REGION_ID = "+myID ) ;
+        Map<String,String> expectedResultMap =  DB_Utility.getRowMap(1) ;
+
+        System.out.println("expectedResultMap = " + expectedResultMap);
+
+        // since the keyname is different in both map we can not directly
+        // compare map to map object
+        // we have to compare the value of key step by step
+        assertThat(  actualResultMap.get("region_id") ,
+                equalTo( expectedResultMap.get("REGION_ID") ) );
+        assertThat(actualResultMap.get("region_name") ,
+                equalTo( expectedResultMap.get("REGION_NAME") ) );
+
+
+
+    }
 
 
 }
