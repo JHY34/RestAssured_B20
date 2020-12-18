@@ -55,4 +55,40 @@ public class SpartanTest {
 
     }
 
+
+    @DisplayName("Get All Spartans")
+    @Test
+    public void getAllSpartans () {
+        given()
+                .log().all()
+                .auth().basic("admin" , "admin")
+                .
+        when()
+                .get("/spartans").prettyPeek().
+        then()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .statusCode(is (200));
+
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
