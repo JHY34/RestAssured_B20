@@ -55,6 +55,7 @@ public class ORDS_API_DB_Test extends HR_ORDS_TestBase {
                 .statusCode(200)
                 .extract()
                 .response();
+        // you can do as (Region.class) directly here
 
         Region r3 = response.as(Region.class) ;
         System.out.println("r3 = " + r3);
