@@ -45,4 +45,18 @@ public class HR_ORDS_Test {
         Country ar1 = response.jsonPath().getObject("",Country.class);
         System.out.println("Argentina with jsonPath = " + ar1);
     }
+
+    @DisplayName("Test GET /countries to List of POJO")
+    @Test
+    public void testAllCountriesResponseToListOfPOJO(){
+
+        Response response = get("/countries").prettyPeek() ;
+
+        List<Country> countryList = response.jsonPath().getList("items", Country.class) ;
+        countryList.forEach(System.out::println);
+
+
+    }
+
+
 }
