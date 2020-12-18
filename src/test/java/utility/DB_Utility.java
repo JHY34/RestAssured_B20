@@ -63,18 +63,13 @@ public class DB_Utility {
 
     // create a method to clean up all the connection statemnet and resultset
     public static void destroy() {
-
         try {
-
-            rs.close();
-            stmnt.close();
-            conn.close();
-
+            if(rs!=null )      rs.close();
+            if(stmnt!=null )   stmnt.close();
+            if(conn!=null )    conn.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
     }
 
     /**
