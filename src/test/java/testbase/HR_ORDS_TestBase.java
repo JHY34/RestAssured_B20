@@ -12,7 +12,7 @@ public abstract class HR_ORDS_TestBase {
     @BeforeAll
     public static void setUp(){
         baseURI = ConfigurationReader.getProperty("ords.baseURL");
-        basePath = ConfigurationReader.getProperty("/ords/hr") ;
+        basePath = ConfigurationReader.getProperty("ords.basePath") ;
         // create DB Connection here
         DB_Utility.createConnection(
                 ConfigurationReader.getProperty("hr.database.url"),
