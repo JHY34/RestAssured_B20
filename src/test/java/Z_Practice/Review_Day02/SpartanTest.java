@@ -62,12 +62,13 @@ public class SpartanTest {
         given()
                 .log().all()
                 .auth().basic("admin" , "admin")
+                .accept(ContentType.XML)
                 .
         when()
                 .get("/spartans").prettyPeek().
         then()
                 .log().all()
-                .contentType(ContentType.JSON)
+                .contentType(ContentType.XML)
                 .statusCode(is (200));
 
 
