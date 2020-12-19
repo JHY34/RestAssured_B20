@@ -36,8 +36,14 @@ public class ReviewGetRequest {
                 .auth().basic("admin" , "admin")
                 .pathParam("id" , 25).
         when()
-                .get("/spartans/{id}");
-
+                .get("/spartans/{id}").prettyPeek().
+        then()
+                .statusCode(is (200))
+                .body("id" , is(25))
+                .body("name" , is("Valentin"))
+                .body("gender" , is("Male"))
+                .body("phone" , is(1536037088))
+                ;
 
     }
 
