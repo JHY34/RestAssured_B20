@@ -28,7 +28,9 @@ public class GitHubRestAPITest {
 
     @DisplayName()
     @Test
-    public void
+    public void method1() {
+
+    }
 
 
 }
