@@ -72,6 +72,31 @@ public class TestingOutLombokDependency extends HR_ORDS_TestBase {
         List<Integer> allDepIdsFiltered = jp.getList("items.department_id.findAll{it>70}") ;
         System.out.println("allDepIdsFiltered = " + allDepIdsFiltered);
         
+        // EVERYTHING WE TYPED HERE IS COMING FROM GROOVY
+        
+        // what if we have more than one condition
+        // fort example department_id > 70 and  department_id < 100
+        List<Integer> deps70to100 = jp.getList("items.department_id.findAll {it > 70 && it < 100}");
+        System.out.println("deps70to100 = " + deps70to100);
+        // prints all depts between 70-100
+        
+        List<String> allDeps70to100 =
+                jp.getList("items.findAll{ it.department_id >=70 && it.department_id <=100}.department.name");
+        System.out.println("allDeps70to100 = " + allDeps70to100);
+        // prints: allDeps70to100 = []
+
+        List<String> allDeps70To100 =
+                jp.getList("items.findAll{ it.department_id >= 70 && it.department_id <= 100 }.department_name") ;
+        System.out.println("allDeps70To100 = " + allDeps70To100);
+        // prints: allDeps70To100 = [Public Relations, Sales, Executive, Finance]
+
+        // sum / min / max  collect
+        // get the sum of entire department_id
+        int sumOfAllDepIDs = jp.getInt("items.department_id.sum()") ;
+        int sumOfAllDepIDs2 = jp.getInt("items.sum {it.department_id} ") ;
+        System.out.println("sumOfAllDepIDs = " + sumOfAllDepIDs);
+        System.out.println("sumOfAllDepIDs2 = " + sumOfAllDepIDs2);
+        
  
     }
 
