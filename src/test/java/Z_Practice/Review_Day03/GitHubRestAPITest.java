@@ -17,8 +17,8 @@ public class GitHubRestAPITest {
 
     @BeforeAll
     public static void setUp() {
-        baseURI = ConfigurationReader.getProperty("spartan.base_url");
-        basePath = "/api";
+       // baseURI = ConfigurationReader.getProperty("spartan.base_url");
+       // basePath = "/api";
     }
 
     @AfterAll
@@ -26,10 +26,25 @@ public class GitHubRestAPITest {
         reset();
     }
 
-    @DisplayName()
+    @DisplayName("Testing GitHub Account")
     @Test
-    public void method1() {
-///
+    public void testingGitHub() {
+
+        // https://api.github.com/users/
+
+        given()
+                .log().all()
+                .pathParam("username" , "JHY34").
+        when()
+                .get("https://api.github.com/users/{username}").
+        then()
+                .log().all()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("login" , equalTo("JHY34"))
+                .body("url" , is ("https://api.github.com/users/JHY34"))
+
+                ;
     }
 
 
