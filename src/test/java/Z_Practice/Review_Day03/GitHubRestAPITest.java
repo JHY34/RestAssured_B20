@@ -14,4 +14,17 @@ import static org.hamcrest.Matchers.* ;
 import static org.hamcrest.MatcherAssert.assertThat ;
 
 public class GitHubRestAPITest {
+
+    @BeforeAll
+    public static void setUp() {
+        baseURI = ConfigurationReader.getProperty("spartan.base_url");
+        basePath = "/api";
+    }
+
+    @AfterAll
+    public static void tearDown () {
+        reset();
+    }
+
+
 }
