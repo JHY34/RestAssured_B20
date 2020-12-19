@@ -1,9 +1,17 @@
 package day09;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Department;
+import testbase.HR_ORDS_TestBase;
 
-public class TestingOutLombokDependency {
+import java.util.List;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+public class TestingOutLombokDependency extends HR_ORDS_TestBase {
 
     @Test
     public void testDepartmentPOJO () {
@@ -16,6 +24,15 @@ public class TestingOutLombokDependency {
         // without adding boiler points we will able to get above constructor by LOMBOK annotation
 
         System.out.println("d2 = " + d2);
+
+    }
+
+    @DisplayName("GET /departments and save List of POJO")
+    @Test
+    public void testDepartmentJsonArrayToListOfPOJO () {
+
+        List<Department> allDeps = get("/departments").jsonPath().getList("items", Department.class);
+        allDeps.forEach(System.out::println);
 
     }
 
