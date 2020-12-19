@@ -62,7 +62,17 @@ public class TestingOutLombokDependency extends HR_ORDS_TestBase {
         // -->> items.findAll {it.manager_id>0 }.department_name (filtered for manager_id more than 0)
         List<String> depNamesFiltered = jp.getList("items.findAll {it.manager_id>0 }.department_name") ;
         System.out.println("depNamesFiltered = " + depNamesFiltered);
-
+        
+        
+        // Get all department_ID if its more than 70
+        List<Integer> allDEpIds = jp.getList("items.department_id") ;
+        System.out.println("allDEpIds = " + allDEpIds);
+        
+        
+        List<Integer> allDepIdsFiltered = jp.getList("items.department_id.findAll{it>70}") ;
+        System.out.println("allDepIdsFiltered = " + allDepIdsFiltered);
+        
+ 
     }
 
 
