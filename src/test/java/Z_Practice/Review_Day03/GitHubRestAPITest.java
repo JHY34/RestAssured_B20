@@ -27,6 +27,7 @@ public class GitHubRestAPITest {
     }
 
     @DisplayName()
+    @Test
 
 
 }
