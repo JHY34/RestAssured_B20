@@ -5,7 +5,10 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.*;
+import pojo.Spartan;
 import utility.ConfigurationReader;
+import utility.SpartanUtil;
+
 import static io.restassured.RestAssured.* ;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.* ;
@@ -31,6 +34,19 @@ public class SpartanWithReusableSpecForAdminRoleTest {
 
     }
 
+    @DisplayName("GET /api/spartans/{id} Endpoint Test")
+    @Test
+    public void testOneSpartan () {
+        given()
+                .spec(givenSpec).pathParam("id" , 34).
+        when()
+                .get("/spartans/{id}").
+        then()
+                .spec(thenSpec)
+                ;
+    }
+
+
     @DisplayName("GET /api/spartans Endpoint Test")
     @Test
     public void testAllSpartan(){
@@ -45,6 +61,19 @@ public class SpartanWithReusableSpecForAdminRoleTest {
 
                 ;
 
+    }
+
+
+
+    @DisplayName("POST /api/spartans Endpoint Test")
+    @Test
+    public void testPostOneData () {
+
+        Spartan randomSpartanPayload = SpartanUtil.getRandomSpartanPOJO_Payload();
+
+        RequestSpecification  postReqSpec =  given().spec(givenSpec)
+                                                    .accept(ContentType.JSON)
+                                                    .body(randomSpartanPayload);
     }
 
 
