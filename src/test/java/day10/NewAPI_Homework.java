@@ -51,6 +51,7 @@ public class NewAPI_Homework {
 
         List<ArticlePOJO> allArticles
                 = jp.getList("articles.findAll{ it.source.id != null && it.author!=null }",ArticlePOJO.class) ;
+        allArticles.forEach(System.out::println);
                 
                 
     }
