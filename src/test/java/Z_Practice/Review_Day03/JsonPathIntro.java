@@ -32,7 +32,16 @@ public class JsonPathIntro {
     @DisplayName("Extracting Data from the Object")
     @Test
     public void extractingData () {
-        JsonPath jp = when().get("/spartans")
+        JsonPath jp =
+                given().auth().basic("admin" , "admin").pathParam("id" , 25).log().all().
+                when().get("/spartans/{id}").jsonPath();
+
+        System.out.println("jp = " + jp);
+        System.out.println("jp.getInt(\"id\") = " + jp.getInt("id"));
+        System.out.println("jp.getInt(\"name\") = " + jp.getString("name"));
+        System.out.println("jp.getInt(\"gender\") = " + jp.getString("gender"));
+        System.out.println("jp.getInt(\"phone\") = " + jp.getLong("phone"));
+
     }
 
 
