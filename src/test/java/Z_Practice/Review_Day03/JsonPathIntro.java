@@ -73,6 +73,13 @@ public class JsonPathIntro {
     @Test
     public void getAllPhoneNumbers () {
 
+        JsonPath jp = given().auth().basic("admin" , "admin").when().get("/spartans").jsonPath();
+
+        System.out.println("jp.getString(\"name[5]\") = " + jp.getString("name[5]"));
+        
+        List<Long> allNumbers = jp.getList("phone");
+        System.out.println("allNumbers = " + allNumbers);
+
     }
 
 
