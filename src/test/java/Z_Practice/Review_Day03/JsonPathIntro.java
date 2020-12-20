@@ -96,8 +96,8 @@ public class JsonPathIntro {
     @DisplayName("Search and Filtering Test")
     @Test
     public void filterNames2 () {
-        JsonPath jp = given().auth().basic("admin", "admin").
-                        when().get("/spartans/search?nameContains=de").jsonPath();
+        JsonPath jp = given().auth().basic("admin", "admin").queryParam("nameContains" , "de").
+                        when().get("/spartans/search").jsonPath();
 
         // Get the name of first guy
         String firstGuy = jp.getString("content[0].name");
