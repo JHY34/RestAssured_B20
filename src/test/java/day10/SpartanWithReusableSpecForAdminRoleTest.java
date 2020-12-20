@@ -43,6 +43,11 @@ public class SpartanWithReusableSpecForAdminRoleTest {
 
     }
 
+    @AfterAll
+    public static void tearDown () {
+        reset();
+    }
+
     @DisplayName("GET /api/spartans/{id} Endpoint Test")
     @Test
     public void testOneSpartan () {
