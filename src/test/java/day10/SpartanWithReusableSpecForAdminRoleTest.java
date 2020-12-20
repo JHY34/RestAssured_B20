@@ -44,6 +44,15 @@ public class SpartanWithReusableSpecForAdminRoleTest {
         then()
                 .spec(thenSpec)
                 ;
+
+        // alternative way , since the data type of givenSpec is already a RequestSpecification
+        givenSpec
+                .pathParam("id",34).
+                when()
+                .get("/spartans/{id}").
+                then()
+                .spec(thenSpec)
+        ;
     }
 
 
@@ -72,8 +81,23 @@ public class SpartanWithReusableSpecForAdminRoleTest {
         Spartan randomSpartanPayload = SpartanUtil.getRandomSpartanPOJO_Payload();
 
         RequestSpecification  postReqSpec =  given().spec(givenSpec)
-                                                    .accept(ContentType.JSON)
+                                                    .contentType(ContentType.JSON)
                                                     .body(randomSpartanPayload);
+
+        ResponseSpecification postResSpec = expect().statusCode(is(201))
+                                                    .contentType(ContentType.JSON)
+                                                    .body("success" ,  is("A Spartan is Born!"))
+                                                    .body("data.id" , notNullValue() )
+                                                    .body("data.name" , is(randomSpartanPayload.getName()) )
+                                                    .body("data.gender" , is(randomSpartanPayload.getGender()) )
+                                                    .body("data.phone" , is(randomSpartanPayload.getPhone()) )
+
+                                                    ;
+
+        given().spec(postReqSpec).
+        when().post("/spartans").
+        then().spec(postResSpec);
+
     }
 
 
