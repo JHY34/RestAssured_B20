@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.* ;
 import static io.restassured.matcher.RestAssuredMatchers.* ;
 import static org.hamcrest.Matchers.* ;
@@ -52,9 +54,36 @@ public class JsonPathIntro {
         System.out.println("response.toString() = " + response.toString());
 
         System.out.println("jp.getString(\"Content-Type\") = " + jp.getString("Content-Type"));
+        // returns null because "Content-Type" IS NOT PART OF PAYLOAD
+    }
 
+    @DisplayName("Get All Spartans")
+    @Test
+    public void getAllSpartans () {
+        JsonPath jp =  given().auth().basic("admin" , "admin").
+                        when().get("/spartans").jsonPath().prettyPeek();
+        List<String> allNames =  jp.getList("name" );
+        System.out.println("allNames = " + allNames);
+        System.out.println("allNames.size() = " + allNames.size());
+    }
+
+
+
+    @DisplayName("Get All Phone Numbers")
+    @Test
+    public void getAllPhoneNumbers () {
 
     }
+
+
+
+
+
+
+
+
+
+
 
 
 
