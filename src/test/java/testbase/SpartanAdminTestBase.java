@@ -8,7 +8,8 @@ import static io.restassured.RestAssured.*;
 
 public class SpartanAdminTestBase {
 
-    static RequestSpecification adminReqSpec ;
+    public static RequestSpecification adminReqSpec ;
+
     @BeforeAll
     public static void setUp() {
         baseURI = ConfigurationReader.getProperty("spartan.base_url");
@@ -18,8 +19,10 @@ public class SpartanAdminTestBase {
                         basic(ConfigurationReader.getProperty("spartan.admin.username"),
                                 ConfigurationReader.getProperty("spartan.admin.password")  ) ;
     }
+
     @AfterAll
     public static void cleanUp(){
         reset();
     }
+
 }
