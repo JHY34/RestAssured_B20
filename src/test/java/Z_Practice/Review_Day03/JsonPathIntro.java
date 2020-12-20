@@ -61,7 +61,7 @@ public class JsonPathIntro {
     @Test
     public void getAllSpartans () {
         JsonPath jp =  given().auth().basic("admin" , "admin").
-                        when().get("/spartans").jsonPath().prettyPeek();
+                        when().get("/spartans").jsonPath();
         List<String> allNames =  jp.getList("name" );
         System.out.println("allNames = " + allNames);
         System.out.println("allNames.size() = " + allNames.size());
@@ -79,6 +79,43 @@ public class JsonPathIntro {
         
         List<Long> allNumbers = jp.getList("phone");
         System.out.println("allNumbers = " + allNumbers);
+    }
+
+    @DisplayName("Names contains specific letters/filter")
+    @Test
+    public void filterNames () {
+        JsonPath jp = given().auth().basic("admin" , "admin").
+                        when().get("/spartans/search?nameContains=ca").jsonPath().prettyPeek();
+
+        List<String> getMatchingNames = jp.getList("content");
+        System.out.println("getMatchingNames = " + getMatchingNames);
+
+    }
+
+
+    @DisplayName("Search and Filtering Test")
+    @Test
+    public void filterNames2 () {
+        JsonPath jp = given().auth().basic("admin", "admin").
+                        when().get("/spartans/search?nameContains=de").jsonPath();
+
+        // Get the name of first guy
+        String firstGuy = jp.getString("content[0].name");
+        System.out.println("firstGuy = " + firstGuy);
+        
+        //get the phone of 3rd guy
+        //long phoneNumber = jp.getLong("content[2].phone");
+        //System.out.println("phoneNumber = " + phoneNumber);
+        
+        
+        List<String> allNames = jp.getList("content.name");
+        System.out.println("allNames = " + allNames);
+        
+        boolean empty = jp.getBoolean("pageable.sort.empty");
+        System.out.println("empty = " + empty);
+        
+        
+
 
     }
 
