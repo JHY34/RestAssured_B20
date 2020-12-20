@@ -100,5 +100,17 @@ public class SpartanWithReusableSpecForAdminRoleTest {
 
     }
 
+    @DisplayName("GET /api/spartans check response time < 1 second")
+    @Test
+    public void testResponseTime(){
+        given()
+                .spec(givenSpec).
+                when()
+                .get("/spartans").
+                then()
+                .spec(thenSpec)
+                .time(is(1000L) );
+    }
+
 
 }
