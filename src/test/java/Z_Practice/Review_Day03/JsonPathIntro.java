@@ -34,13 +34,25 @@ public class JsonPathIntro {
     public void extractingData () {
         JsonPath jp =
                 given().auth().basic("admin" , "admin").pathParam("id" , 25).log().all().
-                when().get("/spartans/{id}").jsonPath();
+                when().get("/spartans/{id}").
+                 then().log().all().extract().jsonPath();
+                
 
         System.out.println("jp = " + jp);
         System.out.println("jp.getInt(\"id\") = " + jp.getInt("id"));
         System.out.println("jp.getInt(\"name\") = " + jp.getString("name"));
         System.out.println("jp.getInt(\"gender\") = " + jp.getString("gender"));
         System.out.println("jp.getInt(\"phone\") = " + jp.getLong("phone"));
+
+        Response response =
+                given().auth().basic("admin" , "admin").pathParam("id" , 25).log().all().
+                        when().get("/spartans/{id}");
+
+        System.out.println("==============");
+        System.out.println("response.toString() = " + response.toString());
+
+        System.out.println("jp.getString(\"Content-Type\") = " + jp.getString("Content-Type"));
+
 
     }
 
