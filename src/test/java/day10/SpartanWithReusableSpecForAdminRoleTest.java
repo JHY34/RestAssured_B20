@@ -9,6 +9,8 @@ import pojo.Spartan;
 import utility.ConfigurationReader;
 import utility.SpartanUtil;
 
+import java.util.concurrent.TimeUnit;
+
 import static io.restassured.RestAssured.* ;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.* ;
@@ -84,7 +86,8 @@ public class SpartanWithReusableSpecForAdminRoleTest {
                                                     .contentType(ContentType.JSON)
                                                     .body(randomSpartanPayload);
 
-        ResponseSpecification postResSpec = expect().statusCode(is(201))
+        ResponseSpecification postResSpec = expect().logDetail(LogDetail.ALL)
+                                                    .statusCode(is(201))
                                                     .contentType(ContentType.JSON)
                                                     .body("success" ,  is("A Spartan is Born!"))
                                                     .body("data.id" , notNullValue() )
@@ -105,12 +108,19 @@ public class SpartanWithReusableSpecForAdminRoleTest {
     public void testResponseTime(){
         given()
                 .spec(givenSpec).
-                when()
+        when()
                 .get("/spartans").
-                then()
+        then()
                 .spec(thenSpec)
-                .time(is(1000L) );
+                .time(lessThan(1000L) )
+                .time(lessThan(1L) , TimeUnit.SECONDS)
+
+                ;
+
     }
+
+
+
 
 
 }
