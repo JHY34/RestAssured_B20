@@ -139,6 +139,13 @@ public class JsonPathIntro {
         System.out.println("jp.getString(\"name[6]\") = " + jp.getString("name[6]"));
 
 
+        System.out.println("=======================================");
+        Response response = given().auth().basic("admin" , "admin").
+                            when().get("/spartans/10").prettyPeek();
+        System.out.println("response.contentType = " + response.contentType());
+        System.out.println("response.jsonPath().getString(\"name\") = " + response.jsonPath().getString("name"));
+
+
        
         
     }
