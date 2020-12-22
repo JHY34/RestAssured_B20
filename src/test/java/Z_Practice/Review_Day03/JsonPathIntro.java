@@ -114,9 +114,27 @@ public class JsonPathIntro {
         boolean empty = jp.getBoolean("pageable.sort.empty");
         System.out.println("empty = " + empty);
         
+    }
+
+    
+    @DisplayName("Practice Test")
+    @Test
+    public void practiceTest () {
+
+        //get the whole name List
+        //get the phone of 3rd guy
+        //get the name of 7th guy
         
+        JsonPath jp = given()
+                .auth().basic("admin", "admin").
+        when()
+                .get("/spartans").jsonPath() ;
 
+        List<String> wholeNameList = jp.getList("name");
 
+        System.out.println("wholeNameList = " + wholeNameList);
+       
+        
     }
 
 
@@ -132,3 +150,17 @@ public class JsonPathIntro {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
