@@ -48,6 +48,7 @@ public class OpenMovieDB {
         System.out.println("jp.getString(\"Genre\") = " + jp.getJsonObject("Writer"));
         System.out.println("jp.getString(\"Genre\") = " + jp.getJsonObject("Runtime"));
         System.out.println("jp.getString(\"Genre\") = " + jp.getJsonObject("Director"));
+        System.out.println("jp.getString(\"Genre\") = " + jp.getJsonObject("Country"));
 
 
     }
