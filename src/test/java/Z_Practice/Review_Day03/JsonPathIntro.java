@@ -128,11 +128,17 @@ public class JsonPathIntro {
         JsonPath jp = given()
                 .auth().basic("admin", "admin").
         when()
-                .get("/spartans").jsonPath() ;
+                .get("/spartans").jsonPath(); //prettyPeek() ;
 
         List<String> wholeNameList = jp.getList("name");
 
         System.out.println("wholeNameList = " + wholeNameList);
+
+        System.out.println("jp.getLong(\"phone[2]\") = " + jp.getLong("phone[2]"));
+
+        System.out.println("jp.getString(\"name[6]\") = " + jp.getString("name[6]"));
+
+
        
         
     }
