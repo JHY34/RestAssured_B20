@@ -47,5 +47,41 @@ public class Test_XML_ElementAttributes {
 
     }
     //http://ergast.com/api/f1/drivers
+    @DisplayName("Test Ergast Developer API /drivers endpoint")
+    @Test
+    public void testDrivers(){
+
+        String driverID =
+                given()
+                        .baseUri("http://ergast.com")
+                        .basePath("/api/f1").
+                        when()
+                        .get("/drivers").
+                        then()
+                        .log().all()
+                        .statusCode(200)
+                        .body("MRData.DriverTable.Driver[0].@driverId", is("abate"))
+                        .body("MRData.DriverTable.Driver[0].GivenName", is("Carlo"))
+                        .extract()
+                        .xmlPath()
+                        .getString("MRData.DriverTable.Driver[0].@driverId")
+                ;
+
+        // Send a request to GET /drivers/:driverId endpoint using above driver id
+
+
+        given()
+                .baseUri("http://ergast.com")
+                .basePath("/api/f1")
+                .pathParam("driverId" , driverID).
+                when()
+                .get("/drivers/{driverId}").
+                then()
+                .log().all()
+                .statusCode(200)
+                .body("MRData.DriverTable.Driver.GivenName",is("Carlo") ) ;
+
+    }
+
 
 }
