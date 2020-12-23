@@ -22,43 +22,58 @@ public class Spartan_POST_PUT_Tests {
         basePath = "/api";
     }
 
+    @AfterAll
+    public static void tearDown () {
+        reset();
+    }
+
+
+
     @DisplayName("POST A Spartan")
     @Test
     public void addOneSpartan () {
 
         Faker faker = new Faker();
 
-//        String jsonObject = " {\n" +
-//                "            \"name\" : faker.funnyName().name() ,\n" +
-//                "            \"gender\" : faker.demographic().sex() ,\n" +
-//                "            \"phone\" : faker.number().numberBetween(5000000000L, 999999999L)\n" +
-//                "        } " ;
+        String randomSpartan = " {\n" +
+                "            \"name\" : "+faker.funnyName().name()+"  ,\n" +
+                "            \"gender\" : "+faker.demographic().sex()+" ,\n" +
+                "            \"phone\" : "+faker.number().numberBetween(5000000000L, 999999999L)+"\n" +
+                "        } " ;
+
+        String newSpartan = "{\n" +
+                "            \"name\" :\"Kandemir\",\n" +
+                "                \"gender\" :\"Male\",\n" +
+                "                \"phone\" :1233211234\n" +
+                "        } ";
 
 
-        String name = "Kerem";
-        String gender = "Male";
-        long phone = 1234561234L;
 
 
 
-        //JsonPath  jp =
+
+        JsonPath  jp =
                 given()
                                     .auth().basic("admin" , "admin")
                                     .log().all()
                                     .contentType(ContentType.JSON)
-                                    .body("name" )
+                                    .body(newSpartan )
                                     .
                             when()
-                                    .get("/spartans").
+                                    .post("/spartans").
                             then()
                                     .log().all()
-                                    .statusCode(is(200))
+                                    .statusCode(is(201))
                                     .contentType(ContentType.JSON)
                                     .extract().jsonPath()
 
                                     ;
 
-      //  System.out.println("jp.getJsonObject(\"Body\") = " + jp.getJsonObject("Body"));
+       System.out.println("jp.getJsonObject(\"Body\") = " + jp.getJsonObject("data"));
+
+        System.out.println("jp.getString(\"success\") = " + jp.getString("success"));
+
+        System.out.println("jp.getString(\"data.name\") = " + jp.getString("data.name"));
 
 
     }
