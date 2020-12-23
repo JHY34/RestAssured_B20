@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import testbase.SpartanAdminTestBase;
 import utility.SpartanUtil;
 
+import java.io.File;
+
 import static io.restassured.RestAssured.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class JsonSchemaValidationPractice extends SpartanAdminTestBase {
@@ -29,6 +32,9 @@ public class JsonSchemaValidationPractice extends SpartanAdminTestBase {
     @Test
     public void testPostSpartanResponseSchema(){
 
+        // We can also use matchesJsonSchema method if we want to provide full path for this file
+        File schemaFile = new File("src/test/resources/postSuccessResponseSchema.json");
+
         given()
                 .spec(adminReqSpec)
                 .contentType(ContentType.JSON)
@@ -36,9 +42,13 @@ public class JsonSchemaValidationPractice extends SpartanAdminTestBase {
                 when()
                 .post("/spartans").
                 then()
-                .body(matchesJsonSchemaInClasspath("postSuccessResponseSchema.json") )
+                //.body(matchesJsonSchemaInClasspath("postSuccessResponseSchema.json") )
+                // what if my schema file is somewhere else other than resource folder ?
+                // then you need t provide full path and use different method
+                .body(matchesJsonSchema( schemaFile )  )
         ;
 
     }
+
 
 }
