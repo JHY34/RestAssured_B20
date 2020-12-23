@@ -75,6 +75,12 @@ public class OpenMovieDB {
         System.out.println("jp.getString(\"Ratings.Source[1]\") = " + jp.getString("Ratings.Source[1]"));
         System.out.println("jp.getString(\"Ratings.Value[1]\") = " + jp.getString("Ratings.Value[1]"));
 
+        System.out.println("jp.getString(\"Plot\").contains(\"ex-hit-man\") = " + jp.getString("Plot").contains("ex-hit-man"));
+
+        System.out.println("jp.getString(\"Production\") = " + jp.getJsonObject("Production"));
+
+        System.out.println("jp.getJsonObject(\"Ratings\") = " + jp.getJsonObject("Ratings"));
+
     }
 
 
