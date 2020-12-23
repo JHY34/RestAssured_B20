@@ -18,7 +18,7 @@ public class OpenMovieDB {
     @BeforeAll
     public static void setUp () {
         baseURI = "http://www.omdbapi.com";
-        basePath = "/?";
+        basePath = "";
     }
 
     @AfterAll
@@ -36,7 +36,7 @@ public class OpenMovieDB {
 
         JsonPath jp =  given()
                 .queryParam("apikey" , "429d5914")
-                .queryParam("t" , "Hababam")
+                .queryParam("t" , "Back to the future")
                 .accept(ContentType.JSON).
         when()
                 .get("").prettyPeek().
