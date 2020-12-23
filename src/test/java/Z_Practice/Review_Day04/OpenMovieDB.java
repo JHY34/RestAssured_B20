@@ -61,16 +61,22 @@ public class OpenMovieDB {
         // http://www.omdbapi.com/?t=Hababam
         // apikey : 429d5914
 
-        given()
+        JsonPath jp = given()
                 .queryParam("apikey" , "429d5914")
+                .queryParam("t" , "John Wick")
                 .log().all().
         when()
                 .get().
         then()
                 .log().all()
                 .statusCode(is (200))
-                .contentType(ContentType.JSON);
+                .contentType(ContentType.JSON).extract().jsonPath();
+
+        System.out.println("jp.getString(\"Ratings.Source[1]\") = " + jp.getString("Ratings.Source[1]"));
+        System.out.println("jp.getString(\"Ratings.Value[1]\") = " + jp.getString("Ratings.Value[1]"));
+
     }
+
 
 
 
