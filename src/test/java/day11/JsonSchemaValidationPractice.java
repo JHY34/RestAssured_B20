@@ -14,7 +14,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 public class JsonSchemaValidationPractice extends SpartanAdminTestBase {
 
-    @DisplayName("Testing GET /spartans endpoint structure")
+    @DisplayName("Testing GET /spartans endpoint response json structure")
     @Test
     public void testAllSpartanResponseSchema(){
 
@@ -49,6 +49,25 @@ public class JsonSchemaValidationPractice extends SpartanAdminTestBase {
         ;
 
     }
+
+    @DisplayName("Testing GET /spartans/search endpoint response structure")
+    @Test
+    public void testSearchSpartanResponseSchema(){
+
+        given()
+                .spec(adminReqSpec)
+                .queryParam("nameContains","a")
+                .queryParam("gender","Female").
+                when()
+                .get("/spartans/search").
+                then()
+                .body(matchesJsonSchemaInClasspath("searchSpartanSchema.json") )
+        ;
+
+
+
+    }
+
 
 
 }
