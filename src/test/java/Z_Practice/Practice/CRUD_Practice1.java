@@ -1,4 +1,4 @@
-package Z_Practice;
+package Z_Practice.Practice;
 
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.AfterAll;

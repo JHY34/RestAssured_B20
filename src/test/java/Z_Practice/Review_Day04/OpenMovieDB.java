@@ -54,5 +54,24 @@ public class OpenMovieDB {
     }
 
 
+    @DisplayName("Getting the Request and Response Logs")
+    @Test
+    public void gettingLogs () {
+
+        // http://www.omdbapi.com/?t=Hababam
+        // apikey : 429d5914
+
+        given()
+                .queryParam("apikey" , "429d5914")
+                .log().all().
+        when()
+                .get().
+        then()
+                .log().all()
+                .statusCode(is (200))
+                .contentType(ContentType.JSON);
+    }
+
+
 
 }
