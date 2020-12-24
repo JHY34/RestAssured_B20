@@ -1,6 +1,7 @@
 package Z_Practice.Review_Day04;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.File;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.AfterAll;
@@ -144,6 +145,8 @@ public class Spartan_POST_PUT_Tests {
     @DisplayName("POST a File")
     @Test
     public void postAList () {
+
+       // File
 
         given()
                 .auth().basic("admin" , "admin")
