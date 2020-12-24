@@ -46,6 +46,25 @@ public class Spartan_PUT_Update {
     @Test
     public void update1Spartan () {
 
+        File fileToUpdate = new File("jsonObjects.json");
+
+        given()
+                .auth().basic("admin" , "admin")
+                .contentType(ContentType.JSON)
+                .body(fileToUpdate)
+                .pathParam("id" , 15).
+        when()
+                .put("/spartans/{id}").prettyPeek().
+        then()
+                .statusCode(is(204))
+                .log().body()
+
+        ;
+//              //  .contentType(ContentType.JSON)
+//                .body("name" , is ("MUSTAFA"));
+        // Above assertions will give error because there is NO BODY to show
+        // At the PUT RESPONSE
+        // That's why statusCode is 204 which is NO CONTENT TO SHOW
     }
 
 
