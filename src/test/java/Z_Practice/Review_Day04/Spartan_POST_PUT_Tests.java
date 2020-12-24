@@ -1,7 +1,6 @@
 package Z_Practice.Review_Day04;
 
 import com.github.javafaker.Faker;
-import com.github.javafaker.File;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.AfterAll;
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,12 +146,12 @@ public class Spartan_POST_PUT_Tests {
     @Test
     public void postAList () {
 
-       // File  //  //
+       File jsonFile = new File("jsonObjects.json");
 
         given()
                 .auth().basic("admin" , "admin")
                 .contentType(ContentType.JSON)
-                .body("jsonObjects.json").
+                .body(jsonFile).
         when()
                 .post("/spartans").
         then()
