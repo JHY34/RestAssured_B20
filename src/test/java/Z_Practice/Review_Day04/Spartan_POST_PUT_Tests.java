@@ -141,6 +141,22 @@ public class Spartan_POST_PUT_Tests {
     }
 
 
+    @DisplayName("POST a File")
+    @Test
+    public void postAList () {
+
+        given()
+                .auth().basic("admin" , "admin")
+                .contentType(ContentType.JSON)
+                .body("jsonObjects.json").
+        when()
+                .post("/spartans").
+        then()
+                .log().body();
+
+    }
+
+
 
 
 
