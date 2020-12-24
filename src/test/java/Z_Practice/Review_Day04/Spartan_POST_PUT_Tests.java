@@ -9,7 +9,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -110,9 +113,30 @@ public class Spartan_POST_PUT_Tests {
 
     }
 
-    @DisplayName("New Test")
+    @DisplayName("Add a new Spartan with Map Object")
     @Test
-    public void newTest () {
+    public void NewSpartanWithPap () {
+
+        Map<String , Object> requestPayload = new LinkedHashMap<>();
+        requestPayload.put("name" , "Erkan");
+        requestPayload.put("gender" , "Male");
+        requestPayload.put("phone" , 4443332221L);
+
+        given()
+                .auth().basic("admin" , "admin")
+                .contentType(ContentType.JSON)
+                .body(requestPayload).
+        when()
+                .post("/spartans").
+        then()
+                .statusCode(201)
+                .contentType(ContentType.JSON)
+                .body("data.name" , is("Erkan"))
+                .body("data.gender" , is("Male"))
+                .body("data.phone" , is(4443332221L))
+                .log().all()
+
+                ;
 
     }
 
