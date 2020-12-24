@@ -89,7 +89,7 @@ public class Spartan_POST_PUT_Tests {
                 "                \"phone\" :2223334445\n" +
                 "        }";
 
-        given()
+    JsonPath jp =    given()
                 .auth().basic("admin" , "admin")
                 .contentType(ContentType.JSON)
                 .body(spartan).log().all().
@@ -97,9 +97,15 @@ public class Spartan_POST_PUT_Tests {
                 .post("/spartans").prettyPeek().
         then()
                 .contentType(ContentType.JSON)
-                .statusCode(is(201))
+                .statusCode(is(201)).extract().jsonPath();
 
                 ;
+
+        System.out.println("Name is = " + jp.getString("data.name"));
+
+        System.out.println("Id is = " + jp.getInt("data.id"));
+
+        System.out.println("Phone number is = " + jp.getLong("data.phone"));
 
 
     }
