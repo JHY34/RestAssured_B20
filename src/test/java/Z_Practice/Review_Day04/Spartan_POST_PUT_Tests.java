@@ -78,4 +78,64 @@ public class Spartan_POST_PUT_Tests {
 
     }
 
+
+    @DisplayName("Add Another Spartan")
+    @Test
+    public void AddSingleSpartan () {
+
+        String spartan = "{\n" +
+                "        \"name\" :\"Cengiz\",\n" +
+                "                \"gender\" :\"Male\",\n" +
+                "                \"phone\" :2223334445\n" +
+                "        }";
+
+        given()
+                .auth().basic("admin" , "admin")
+                .contentType(ContentType.JSON)
+                .body(spartan).log().all().
+        when()
+                .post("/spartans").prettyPeek().
+        then()
+                .contentType(ContentType.JSON)
+                .statusCode(is(201))
+
+                ;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
