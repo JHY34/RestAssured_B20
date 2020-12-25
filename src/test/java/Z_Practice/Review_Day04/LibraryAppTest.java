@@ -22,13 +22,20 @@ public class LibraryAppTest {
 
     @BeforeAll
     public static void setUp() {
-        baseURI = ConfigurationReader.getProperty("spartan.base_url");
-        basePath = "/api";
+        baseURI = "library1.cybertekschool.com";
+        basePath = "/rest/v1";
     }
 
     @AfterAll
     public static void tearDown () {
         reset();
+    }
+
+
+    @DisplayName("Library Login Test")
+    @Test
+    public void libraryLogin () {
+
     }
 
 
