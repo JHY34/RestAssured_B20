@@ -91,4 +91,20 @@ public class Spartan_PUT_Update {
 
                 ;
     }
+
+    @DisplayName("Delete 1 Spartan")
+    @Test
+    public void delete1Spartan () {
+        given()
+                .log().all()
+                .auth().basic("admin" , "admin")
+                .pathParam("id" , 186).
+        when()
+                .delete("/spartans/{id}").prettyPeek().
+        then()
+                .log().all()
+                .statusCode(is(204))
+                .body(emptyString())
+                ;
+    }
 }
