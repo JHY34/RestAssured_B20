@@ -43,7 +43,7 @@ public class LibraryAppTest {
         password --> KNPXrm3S
          */
 
-        JsonPath jp = given()
+        String myToken = given()
                 .log().all()
                 .contentType(ContentType.URLENC)
                 .formParam("email" ,"librarian69@library" )
@@ -54,10 +54,14 @@ public class LibraryAppTest {
                 .log().all()
                 .statusCode(200)
                 .body(is(not(emptyString())))
-                .body("token" , not(emptyString())).extract().jsonPath()
+                .body("token" , not(emptyString())).
+        extract()
+                .jsonPath().getString("token")
                 ;
 
-        System.out.println("token = " + jp.getString("token"));
+        System.out.println("myToken = " + myToken);
+
+        
 
         //
 
