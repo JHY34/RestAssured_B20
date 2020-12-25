@@ -68,4 +68,27 @@ public class Spartan_PUT_Update {
     }
 
 
+    @DisplayName("PATCH - Partial Update")
+    @Test
+    public void partialUpdate () {
+        String update = "{\n" +
+                "            \"name\" : \"Erkut\"\n" +
+                "        }";
+
+
+        given()
+                .log().all()
+                .auth().basic("admin" , "admin")
+                .contentType(ContentType.JSON)
+                .body(update)
+                .pathParam("id" , 15).
+        when()
+                .patch("/spartans/{id}").
+        then()
+                .log().all()
+                .statusCode(204)
+                .body(emptyString())
+
+                ;
+    }
 }
