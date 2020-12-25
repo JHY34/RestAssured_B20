@@ -22,9 +22,10 @@ public class LibraryAppTest {
 
     @BeforeAll
     public static void setUp() {
-        baseURI = "library1.cybertekschool.com";
+        baseURI = "http://library1.cybertekschool.com";
         basePath = "/rest/v1";
     }
+
 
     @AfterAll
     public static void tearDown () {
@@ -35,6 +36,27 @@ public class LibraryAppTest {
     @DisplayName("Library Login Test")
     @Test
     public void libraryLogin () {
+
+        /*
+        Librarian1
+        email --> librarian69@library
+        password --> KNPXrm3S
+         */
+
+        given()
+                .log().all()
+                .contentType(ContentType.URLENC)
+                .formParam("email" ,"librarian69@library" )
+                .formParam("password" ,"KNPXrm3S" ).
+        when()
+                .post("/login").
+        then()
+                .log().all()
+                .statusCode(200)
+                .body(is(not(emptyString())))
+
+                ;
+
 
     }
 
