@@ -54,6 +54,7 @@ public class LibraryAppTest {
                 .log().all()
                 .statusCode(200)
                 .body(is(not(emptyString())))
+                .body("token" , not(emptyString()))
 
                 ;
 
