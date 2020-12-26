@@ -17,6 +17,44 @@ import static org.hamcrest.Matchers.*;
 
 public class Extract_Practice {
 
+    @BeforeAll
+    public static void setUp() {
+        baseURI = ConfigurationReader.getProperty("spartan.base_url");
+        basePath = "/api";
+    }
+
+    @AfterAll
+    public static void tearDown () {
+        reset();
+    }
+
+
+    @DisplayName("Spartan Search")
+    @Test
+    public void spartanSearch () {
+
+    JsonPath jp = given()
+                            .auth().basic("admin" , "admin")
+                            .log().all()
+                            .queryParam("gender" , "Male")
+                            .queryParam("nameContains" , "ea").
+                    when()
+                            .get("/spartans/search").
+                    then()
+                            .statusCode(is(200))
+                            .log().body()
+                            .body("content[0].name" , is("Earlie"))
+                            .body("content[1].phone" , is(8566508311L))
+                            .body("numberOfElements" , equalTo(2))
+                            .extract().jsonPath()
+                            ;
+        System.out.println("jp.getBoolean(\"pageable.sorted.unsorted\") = " + jp.getBoolean("pageable.sort.unsorted"));
+        System.out.println("jp.getBoolean(\"pageable.sorted.sorted\") = " + jp.getBoolean("pageable.sort.sorted"));
+        System.out.println("jp.getBoolean(\"pageable.sorted.empty\") = " + jp.getBoolean("pageable.sort.empty"));
+
+    }
+
+
 
 
 }
