@@ -21,6 +21,13 @@ public class Hamcrest_Collection_Support {
 
         assertThat(listOfNumbers , not (hasItem(40)));
 
+        assertThat(listOfNumbers , everyItem(is (greaterThan( 3 ))));
+
+        assertThat(listOfNumbers , everyItem(is (not(greaterThan( 30 )))));
+
+        assertThat(listOfNumbers , everyItem(is (lessThan( 100 ))));
+
+
     }
 
 
