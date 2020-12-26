@@ -15,7 +15,10 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class LibraryAppTests {
+
+    static String myToken;
 
     @BeforeAll
     public static void setUp() {
@@ -32,17 +35,35 @@ public class LibraryAppTests {
 
     @DisplayName("Login the Library App")
     @Test
-    public void loginLibrary () {
+    public void a_loginLibrary () {
 
-        given()
+         myToken = given()
                 .contentType(ContentType.URLENC)
                 .formParam("email" , "librarian69@library")
-                .formParam("password" , "KNPXrm3S").
+                .formParam("password" , "KNPXrm3S").log().all().
         when()
-                .post("/login");
+                .post("/login").
+        then()
+                .log().all()
+                .statusCode(is(200))
+                .extract().jsonPath().getString("token");
+        
+        ;
 
+        System.out.println("myToken = " + myToken);
 
     }
+
+    @DisplayName("Dashboard_Stats")
+    @Test
+    public void z_dashboardStats () {
+        given()
+                .header("x-library-token" , myToken).
+        when()
+                .get("/dashboard_stats");
+    }
+
+
 
 
 
