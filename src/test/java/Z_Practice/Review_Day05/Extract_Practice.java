@@ -58,7 +58,9 @@ public class Extract_Practice {
 
     @DisplayName("New Test")
     @Test
-    public void
+    public void newTest() {
+
+    }
 
 
 
