@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 
 public class LibraryAppTest {
 
-    String myToken;
+    static String myToken;
 
     @BeforeAll
     public static void setUp() {
@@ -45,7 +45,7 @@ public class LibraryAppTest {
         password --> KNPXrm3S
          */
 
-         myToken = given()
+          myToken = given()
                 .log().all()
                 .contentType(ContentType.URLENC)
                 .formParam("email" ,"librarian69@library" )
@@ -73,6 +73,11 @@ public class LibraryAppTest {
                 .header("x-library-token" , myToken).
         when()
                 .get("/dashboard_stats").prettyPeek();
+    }
+    
+    @Test
+    public void variableTest () {
+        System.out.println("myToken = " + myToken);
     }
 
 
