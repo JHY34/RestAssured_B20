@@ -52,6 +52,8 @@ public class Extract_Practice {
         System.out.println("jp.getBoolean(\"pageable.sorted.sorted\") = " + jp.getBoolean("pageable.sort.sorted"));
         System.out.println("jp.getBoolean(\"pageable.sorted.empty\") = " + jp.getBoolean("pageable.sort.empty"));
 
+        System.out.println("jp.getList(\"content.name\") = " + jp.getList("content.name"));
+
     }
 
 
