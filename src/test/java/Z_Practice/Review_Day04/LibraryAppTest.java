@@ -20,6 +20,8 @@ import static org.hamcrest.Matchers.*;
 
 public class LibraryAppTest {
 
+    String myToken;
+
     @BeforeAll
     public static void setUp() {
         baseURI = "http://library1.cybertekschool.com";
@@ -43,7 +45,7 @@ public class LibraryAppTest {
         password --> KNPXrm3S
          */
 
-        String myToken = given()
+         myToken = given()
                 .log().all()
                 .contentType(ContentType.URLENC)
                 .formParam("email" ,"librarian69@library" )
@@ -61,12 +63,16 @@ public class LibraryAppTest {
 
         System.out.println("myToken = " + myToken);
 
-        
+    }
 
-        //
-
-
-
+    @DisplayName("Get Dashboard Stats")
+    @Test
+    public void getDashboardStats () {
+        given()
+               // .header("x-library-token" , "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoiMjA5MCIsImZ1bGxfbmFtZSI6IlRlc3QgTGlicmFyaWFuIDY5IiwiZW1haWwiOiJsaWJyYXJpYW42OUBsaWJyYXJ5IiwidXNlcl9ncm91cF9pZCI6IjIifSwiaWF0IjoxNjA4OTQ3NjU4LCJleHAiOjE2MTE1Mzk2NTh9.CnnuxDIo21-8ledY21FoNVeZeeB7waQsR4j4mN7WYJA").
+                .header("x-library-token" , myToken).
+        when()
+                .get("/dashboard_stats").prettyPeek();
     }
 
 
