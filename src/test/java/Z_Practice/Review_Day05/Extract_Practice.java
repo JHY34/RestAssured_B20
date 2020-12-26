@@ -60,7 +60,7 @@ public class Extract_Practice {
     @Test
     public void newTest() {
 
-        //
+        // New test plans
 
     }
 
