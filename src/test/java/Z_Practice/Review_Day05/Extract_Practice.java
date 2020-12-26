@@ -56,7 +56,7 @@ public class Extract_Practice {
 
     }
 
-    @DisplayName()
+    @DisplayName("New Test")
 
 
 
