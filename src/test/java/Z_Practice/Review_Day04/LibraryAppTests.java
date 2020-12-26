@@ -30,6 +30,21 @@ public class LibraryAppTests {
     }
 
 
+    @DisplayName("Login the Library App")
+    @Test
+    public void loginLibrary () {
+
+        given()
+                .contentType(ContentType.URLENC)
+                .formParam("email" , "librarian69@library")
+                .formParam("password" , "KNPXrm3S").
+        when()
+                .post("/login");
+
+
+    }
+
+
 
 
 }
