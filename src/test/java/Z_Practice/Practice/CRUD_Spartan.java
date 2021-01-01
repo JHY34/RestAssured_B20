@@ -30,7 +30,12 @@ public class CRUD_Spartan {
     public void postRequest() {
 
         Map<String, Object> spartan1 = new HashMap<>();
-        spartan1
+        spartan1.put("name" , "Akin");
+        spartan1.put("gender" , "Male");
+        spartan1.put("phone" , 1233455432);
+
+        
+
 
 
 
