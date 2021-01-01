@@ -29,4 +29,35 @@ public class Spartan_Util {
     }
 
 
+    @DisplayName("Create 1 Spartan")
+    @Test
+    public void createOneSpartan () {
+
+        Faker faker = new Faker();
+
+        String randomSpartan = "{\n" +
+                "            \"name\" : faker.funnyName().name();\n" +
+                "            \"gender\" : faker.demographic().sex();\n" +
+                "            \"phone\" : faker.number().numberBetween(3_000_000_000L , 9_999_999_999L);\n" +
+                "        }";
+
+//        {
+//            "name" : faker.funnyName().name();
+//            "gender" : faker.demographic().sex();
+//            "phone" : faker.number().numberBetween(3_000_000_000L , 9_999_999_999L);
+//        }
+
+
+        given()
+                .auth().basic("admin", "admin")
+                .contentType(ContentType.JSON)
+                .body(randomSpartan).
+        when()
+                .post("/spartans").
+        then()
+                .statusCode(201)
+                .contentType(ContentType.JSON);
+    }
+
+
 }
