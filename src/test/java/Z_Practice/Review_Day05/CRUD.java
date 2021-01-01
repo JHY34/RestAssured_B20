@@ -19,10 +19,13 @@ import static org.hamcrest.Matchers.*;
 
 public class CRUD {
 
+    public static Map<String , Object> payload ;
+
         @BeforeAll
     public static void setUp() {
         baseURI = ConfigurationReader.getProperty("spartan.base_url");
-        basePath = "/api";
+        basePath = "/api" ;
+        payload = Spartan_Util.getOneSpartanPayload();
     }
 
     @AfterAll
@@ -38,13 +41,16 @@ public class CRUD {
                     .auth().basic("admin" , "admin")
                     .log().all()
                     .contentType(ContentType.JSON)
-                    .body(Spartan_Util.getOneSpartanPayload()).
+                    .body(payload).
             when()
                     .post("/spartans").
             then()
                     .contentType(ContentType.JSON)
                     .log().all()
                     .statusCode(201)
+                    .body("data.name"  , is (equalTo(payload.get("name"))))
+                    .body("data.gender"  , is (equalTo(payload.get("gender"))))
+                    .body("data.phone"  , is (equalTo(payload.get("phone"))))
                     ;
     }
 }
