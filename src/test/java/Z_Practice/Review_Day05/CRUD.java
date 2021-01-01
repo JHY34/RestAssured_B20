@@ -19,7 +19,8 @@ import static org.hamcrest.Matchers.*;
 
 public class CRUD {
 
-    public static Map<String , Object> payload ;
+    private static Map<String , Object> payload ;
+    private static int newId;
 
         @BeforeAll
     public static void setUp() {
@@ -37,20 +38,28 @@ public class CRUD {
     @DisplayName("POST 1 Spartan")
     @Test
     public void postOneSpartan () {
-            given()
-                    .auth().basic("admin" , "admin")
-                    .log().all()
-                    .contentType(ContentType.JSON)
-                    .body(payload).
-            when()
-                    .post("/spartans").
-            then()
-                    .contentType(ContentType.JSON)
-                    .log().all()
-                    .statusCode(201)
-                    .body("data.name"  , is (equalTo(payload.get("name"))))
-                    .body("data.gender"  , is (equalTo(payload.get("gender"))))
-                    .body("data.phone"  , is (equalTo(payload.get("phone"))))
-                    ;
+      newId       =       given()
+                                        .auth().basic("admin" , "admin")
+                                        .log().all()
+                                        .contentType(ContentType.JSON)
+                                        .body(payload).
+                                when()
+                                        .post("/spartans").
+                                then()
+                                        .contentType(ContentType.JSON)
+                                        .log().all()
+                                        .statusCode(201)
+                                        .body("data.name"  , is (equalTo(payload.get("name"))))
+                                        .body("data.gender"  , is (equalTo(payload.get("gender"))))
+                                        .body("data.phone"  , is (equalTo(payload.get("phone"))))
+
+                                .extract()
+                                        .jsonPath().getInt("data.id")
+
+                                        ;
+
+        System.out.println("newId = " + newId);
+
     }
+
 }
