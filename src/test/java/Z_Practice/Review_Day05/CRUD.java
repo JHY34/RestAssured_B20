@@ -67,6 +67,18 @@ public class CRUD {
     @Test
     public void getOneSpartan () {
 
+            given()
+                    .auth().basic("admin" , "admin")
+                    .log().all()
+                    .pathParam("id" , newId).
+            when()
+                    .get("/spartans/{id}").
+            then()
+                    .statusCode(200)
+                    .log().all()
+                    .contentType(ContentType.JSON)
+                    .body("id" , is(newId));
+
     }
 
 }
