@@ -86,6 +86,27 @@ public class CRUD {
     @Test
     public void updateOneSpartan () {
 
+            Faker faker = new Faker();
+
+            Map<String, Object> payload = new LinkedHashMap<>();
+            payload.put("name" , faker.name().firstName());
+            payload.put("gender" , faker.demographic().sex());
+            payload.put("phone" , faker.number().numberBetween(3000000000L , 9999999999L));
+
+            given()
+                    .auth().basic("admin" , "admin")
+                    .log().all()
+                    .pathParam("id" , newId)
+                    .contentType(ContentType.JSON)
+                    .body(payload).
+            when()
+                    .put("/spartans/{id}").
+            then()
+                    .log().all()
+                    .statusCode(is(204))
+                   // .contentType(ContentType.JSON)
+            ;
+
     }
 
 }
