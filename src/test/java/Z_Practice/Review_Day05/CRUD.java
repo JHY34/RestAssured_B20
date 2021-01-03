@@ -62,4 +62,11 @@ public class CRUD {
 
     }
 
+
+    @DisplayName("Get 1 Spartan")
+    @Test
+    public void getOneSpartan () {
+
+    }
+
 }
