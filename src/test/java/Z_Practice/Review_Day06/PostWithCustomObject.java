@@ -26,5 +26,24 @@ public class PostWithCustomObject {
         reset();
     }
 
+    @DisplayName("Posting from POJO Spartan Class")
+    @Test
+    public void postingFromPOJO () {
+
+        POJO_Class_Spartan ps = new POJO_Class_Spartan("Sami" , "Male" , 2323454556L);
+
+        given()
+                .auth().basic("admin" , "admin")
+                .log().all()
+                .body(ps)
+                .contentType(ContentType.JSON).
+        when()
+                .post("/spartans").
+        then()
+                .statusCode(201)
+                .log().all()
+                .contentType(ContentType.JSON);
+    }
+
 
 }

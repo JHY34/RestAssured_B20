@@ -2,7 +2,7 @@ package pojo;
 
 // A POJO (Plain Old Java Object)
 // is used to create object that represent data
-// it must have encapuslated fields and public constructor (no arg)
+// it must have encapsulated fields and public constructor (no arg)
 public class Spartan {
 
     private String name;
