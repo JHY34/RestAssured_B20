@@ -109,4 +109,31 @@ public class CRUD {
 
     }
 
+    @DisplayName("Delete Spartan")
+    @Test
+    public void deleteSpartan () {
+            given()
+                    .auth().basic("admin" , "admin")
+                    .log().all()
+                    .pathParam("id" , newId).
+            when()
+                    .delete("/spartans/{id}").
+            then()
+                    .log().all()
+                    .statusCode(204);
+
+
+        given()
+                .auth().basic("admin" , "admin")
+                .log().all()
+                .pathParam("id" , newId).
+                when()
+                .delete("/spartans/{id}").
+                then()
+                .log().all()
+                .statusCode(404);
+
+
+    }
+
 }
