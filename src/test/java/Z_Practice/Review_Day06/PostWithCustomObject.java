@@ -30,7 +30,7 @@ public class PostWithCustomObject {
     @Test
     public void postingFromPOJO () {
 
-        POJO_Class_Spartan ps = new POJO_Class_Spartan("Sami" , "Male" , 2323454556L);
+        POJO_Class_Spartan ps = new POJO_Class_Spartan("Sami" , "Male" , 3323454556L);
 
         given()
                 .auth().basic("admin" , "admin")
@@ -42,7 +42,11 @@ public class PostWithCustomObject {
         then()
                 .statusCode(201)
                 .log().all()
-                .contentType(ContentType.JSON);
+                .contentType(ContentType.JSON)
+                .body("data.name" , is(ps.getName()))
+                .body("data.gender" , is(ps.getGender()))
+                .body("data.phone" , is(ps.getPhone()));
+
     }
 
 
