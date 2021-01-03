@@ -81,4 +81,11 @@ public class CRUD {
 
     }
 
+
+    @DisplayName("Update 1 Spartan")
+    @Test
+    public void updateOneSpartan () {
+
+    }
+
 }
