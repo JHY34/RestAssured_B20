@@ -1,6 +1,7 @@
 package Z_Practice.Review_Day06;
 
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,6 +25,24 @@ public class JsonToJavaObject {
     @AfterAll
     public static void tearDown () {
         reset();
+    }
+
+    @DisplayName("Get 1 Data with Save Response Json As Java Object")
+    @Test
+    public void deSerializationExample () {
+     JsonPath jp =     given()
+                                .auth().basic("admin" , "admin")
+                                .pathParam("id" , 25)
+                                .log().all().
+                        when()
+                                .get("/spartans/{id}").
+                        then()
+                                .statusCode(200)
+                                .log().all().extract().jsonPath()
+                                ;
+
+        System.out.println("jp.getMap(\"\") = " + jp.getMap(""));
+
     }
 
 
