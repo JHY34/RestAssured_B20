@@ -1,5 +1,6 @@
 package Z_Practice.Review_Day07;
 
+import Z_Practice.Review_Day06.POJO_Class_Spartan;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.path.json.JsonPath;
@@ -63,5 +64,24 @@ public class PatchOneSpartan {
         when()
                 .patch("/spartans/{id}").prettyPeek();
     }
+
+
+    @DisplayName("Patch 1 Spartan From POJO")
+    @Test
+    public void patchOneSpartanFromPOJO () {
+
+        POJO_Class_Spartan pojoObject = new POJO_Class_Spartan("Alex" , null , 0);
+
+        given()
+                .auth().basic("admin" , "admin")
+                .log().all()
+                .pathParam("id" , 44)
+                .body(pojoObject)
+                .contentType(ContentType.JSON).
+                when()
+                .patch("/spartans/{id}").prettyPeek();
+    }
+
+
 
 }
