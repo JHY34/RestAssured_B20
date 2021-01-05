@@ -10,6 +10,7 @@ import utility.ConfigurationReader;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
@@ -38,6 +39,28 @@ public class GetSpartans {
         System.out.println("allNames = " + allNames);
         allNames.forEach(System.out::println);
        
+    }
+
+    @DisplayName("Get One Spartan")
+    @Test
+    public void getOneSpartan () {
+        Map<Object, Object> jp = given()
+                                        .auth().basic("admin", "admin")
+                                        .log().all()
+                                        .pathParam("id", 34).
+                                  when()
+                                        .get("/spartans/{id}").
+                                  then()
+                                        .statusCode(200)
+                                        .log().all()
+                                  .extract().jsonPath().getMap("");
+
+        System.out.println("jp = " + jp);
+
+
+
+
+
     }
 
 
