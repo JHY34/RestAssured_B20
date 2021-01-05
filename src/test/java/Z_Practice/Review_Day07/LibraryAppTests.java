@@ -1,6 +1,7 @@
 package Z_Practice.Review_Day07;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.*;
@@ -52,6 +53,24 @@ public class LibraryAppTests {
                 .header("x-library-token" , myToken).
         when()
                 .get("/dashboard_stats");
+    }
+
+
+
+    @DisplayName("Save the result of Get Dashboard")
+    @Test
+    public void saveResult () {
+    Response response =  given()
+                            .header("x-library-token" , myToken).
+                    when()
+                            .get("/dashboard_stats").prettyPeek();
+
+        System.out.println("response.getMap() = " + response.jsonPath().getMap(""));
+
+        Library_POJO lpojo = response.as(Library_POJO.class);
+
+        System.out.println("lpojo = " + lpojo);
+
     }
 
 
