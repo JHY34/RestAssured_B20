@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class GetSpartans {
 
@@ -57,8 +59,27 @@ public class GetSpartans {
 
         System.out.println("jp = " + jp);
 
+    }
 
+    @DisplayName("Get One Spartan and Save as POJO class Object")
+    @Test
+    public void getOneSpartanAndSaveAsPOJOObject () {
+        Response response = given()
+                .auth().basic("admin", "admin")
+                .log().all()
+                .pathParam("id", 34).
+                        when()
+                .get("/spartans/{id}").prettyPeek();
 
+        SpartanRead spartan = response.body().as(SpartanRead.class);
+
+        System.out.println("spartan.getGender() = " + spartan.getGender());
+
+        System.out.println("spartan.toString() = " + spartan.toString());
+
+        assertThat (spartan.getGender(), is("Female"));
+        assertThat (spartan.getName(), is("Tuckiye"));
+        assertThat (spartan.getId(), is(34));
 
 
     }
