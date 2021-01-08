@@ -20,6 +20,11 @@ public class ResponsePractice {
         basePath ="/api";
     }
 
+    @AfterAll
+    public static void tearDown () {
+        reset();
+    }
+
     @Test
     public void getResponse() {
 
